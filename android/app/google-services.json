@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "885740810078",
+    "project_id": "tripconncet",
+    "storage_bucket": "tripconncet.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:885740810078:android:650c180b73b66f7182a9cf",
+        "android_client_info": {
+          "package_name": "com.example.trip_connect"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "885740810078-t25c2e1pidvh3gf2jthe3lva9075crkb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAEf_Nia-LdE6VrBLiw6LsqWIyEfAzwSX0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "885740810078-t25c2e1pidvh3gf2jthe3lva9075crkb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
