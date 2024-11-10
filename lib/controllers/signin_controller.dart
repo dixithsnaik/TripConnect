@@ -7,9 +7,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
-
 class SignInController extends GetxController {
-  // Observable variables
   var checkbox = false.obs;
   var isLoading = false.obs;
   String userId = FirebaseAuth.instance.currentUser?.uid ?? "";
