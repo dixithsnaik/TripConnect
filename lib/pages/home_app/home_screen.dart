@@ -8,7 +8,7 @@ import 'package:trip_connect/globle/pallet.dart';
 import 'package:trip_connect/controllers/home_controller.dart';
 
 class HomeScreen extends StatefulWidget {
-  HomeScreen({super.key});
+  const HomeScreen({super.key});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
