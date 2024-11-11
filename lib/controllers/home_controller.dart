@@ -113,9 +113,19 @@ class HomeController extends GetxController {
   }
 ]''';
 
-  // Method to set the map style
+  GoogleMapController? mapController;
+
   void setMapStyle(GoogleMapController controller) {
-    _controller = controller;
-    _controller.setMapStyle(_mapStyle); // Set the custom map style
+    mapController = controller; // Store the controller instance
+    mapController!.setMapStyle(_mapStyle); // Apply map style
   }
+
+  void moveToPosition(LatLng target) {
+    if (mapController != null) {
+      mapController!.animateCamera(
+          CameraUpdate.newLatLng(target)); // Move camera to the target position
+    }
+  }
+
+ 
 }

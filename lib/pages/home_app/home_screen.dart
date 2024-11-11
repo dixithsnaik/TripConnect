@@ -16,7 +16,6 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final SignInController signInController = Get.find();
-
   final HomeController homeController = Get.find();
 
   final LatLng _pGooglePlex = const LatLng(37.4223, -122.0848);
@@ -25,27 +24,78 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: scaffoldBackgroundColor,
+      backgroundColor: blackColor,
       appBar: appBar(),
+      bottomNavigationBar: BottomNavigationBar(
+        items: const [
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: ''),
+          BottomNavigationBarItem(icon: Icon(Icons.search), label: ''),
+        ],
+        currentIndex: 0, // Keep this consistent
+        onTap: (index) {}, // No actions needed
+        selectedItemColor: Colors.transparent,
+        unselectedItemColor: Colors.transparent,
+        backgroundColor: Colors.transparent,
+        elevation: 0, // Removes shadow
+      ),
+      floatingActionButton: Container(
+        margin: const EdgeInsets.only(bottom: 20),
+        width: 55.0,
+        height: 55.0,
+        decoration: const BoxDecoration(
+          shape: BoxShape.circle,
+          boxShadow: [
+            BoxShadow(
+              color: Color(0XFF9DB2CE),
+              spreadRadius: 2,
+              blurRadius: 5,
+              offset: Offset(0, 4),
+            ),
+          ],
+        ),
+        child: FloatingActionButton(
+          onPressed: () {},
+          backgroundColor: whiteColor,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(100),
+          ),
+          child: SvgPicture.asset(
+            'assets/icons/location.svg',
+            fit: BoxFit.fill,
+            height: 30,
+          ),
+        ),
+      ),
       body: Stack(
         children: [
-          GoogleMap(
-            onMapCreated: homeController.setMapStyle,
-            initialCameraPosition:
-                CameraPosition(target: _pGooglePlex, zoom: 13),
-            markers: {
-              Marker(
-                markerId: const MarkerId("_currentLocation"),
-                icon: BitmapDescriptor.defaultMarker,
-                position: _pGooglePlex,
-              ),
-              Marker(
-                markerId: const MarkerId("_sourceLocation"),
-                icon: BitmapDescriptor.defaultMarker,
-                position: _pApplePark,
-              )
-            },
-          ),
+          Obx(() {
+            if (homeController.isGroupTab.value) {
+              // Move to GooglePlex
+              homeController.moveToPosition(_pGooglePlex);
+            } else {
+              // Move to ApplePark
+              homeController.moveToPosition(_pApplePark);
+            }
+
+            return GoogleMap(
+              onMapCreated: homeController.setMapStyle,
+              initialCameraPosition:
+                  CameraPosition(target: _pGooglePlex, zoom: 13),
+              zoomControlsEnabled: false,
+              markers: {
+                Marker(
+                  markerId: const MarkerId("_currentLocation"),
+                  icon: BitmapDescriptor.defaultMarker,
+                  position: _pGooglePlex,
+                ),
+                Marker(
+                  markerId: const MarkerId("_sourceLocation"),
+                  icon: BitmapDescriptor.defaultMarker,
+                  position: _pApplePark,
+                ),
+              },
+            );
+          }),
           Obx(
             () => AnimatedContainer(
               margin:
@@ -93,28 +143,28 @@ class _HomeScreenState extends State<HomeScreen> {
 
   AppBar appBar() {
     return AppBar(
-      backgroundColor: scaffoldBackgroundColor,
-      foregroundColor: scaffoldBackgroundColor,
-      surfaceTintColor: scaffoldBackgroundColor,
+      backgroundColor: blackColor,
+      foregroundColor: blackColor,
+      surfaceTintColor: blackColor,
       centerTitle: false,
       title: Text(
         "TripConnect",
         style: GoogleFonts.poppins(
-          fontSize: 18,
+          fontSize: 20,
           fontWeight: FontWeight.w600,
           letterSpacing: 0.26,
-          color: secondaryColor,
+          color: whiteColor,
         ),
       ),
       actions: [
         Padding(
-          padding: const EdgeInsets.only(right: 16),
+          padding: const EdgeInsets.only(right: 16, bottom: 6),
           child: CircleAvatar(
             radius: 18,
-            backgroundColor: secondaryColor,
+            backgroundColor: whiteColor,
             child: SvgPicture.asset(
               'assets/icons/notification-bell-new.svg',
-              height: 22,
+              height: 28,
             ),
           ),
         ),
@@ -127,16 +177,16 @@ class _HomeScreenState extends State<HomeScreen> {
       margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 6),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
-        color: isActive ? secondaryColor : blackColor,
+        color: isActive ? whiteColor : blackColor,
       ),
       child: Center(
         child: Text(
           title,
           style: GoogleFonts.poppins(
             fontSize: 14,
-            fontWeight: FontWeight.w600,
+            fontWeight: isActive ? FontWeight.w700 : FontWeight.w600,
             letterSpacing: 0.26,
-            color: isActive ? whiteColor : const Color(0XFFD6D6D6),
+            color: isActive ? blackColor : secondaryTextColor,
           ),
         ),
       ),
