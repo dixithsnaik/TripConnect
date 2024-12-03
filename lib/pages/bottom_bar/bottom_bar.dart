@@ -97,6 +97,7 @@ class BottomNavItem extends StatelessWidget {
           ),
           width: 60,
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SvgPicture.asset(

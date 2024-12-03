@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:trip_connect/controllers/map_controller.dart';
 import 'package:trip_connect/controllers/signin_controller.dart';
 import 'package:trip_connect/globle/pallet.dart';
 import 'package:trip_connect/controllers/home_controller.dart';
@@ -17,6 +18,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final SignInController signInController = Get.find();
   final HomeController homeController = Get.find();
+  final MapController mapController = Get.find();
 
   final LatLng _pGooglePlex = const LatLng(37.4223, -122.0848);
   final LatLng _pApplePark = const LatLng(37.3346, -122.0090);
@@ -78,7 +80,7 @@ class _HomeScreenState extends State<HomeScreen> {
             }
 
             return GoogleMap(
-              onMapCreated: homeController.setMapStyle,
+              onMapCreated: mapController.setMapStyle,
               initialCameraPosition:
                   CameraPosition(target: _pGooglePlex, zoom: 13),
               zoomControlsEnabled: false,

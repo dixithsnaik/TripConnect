@@ -6,11 +6,19 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:trip_connect/all_bindings.dart';
 import 'package:trip_connect/controllers/navigation_controller.dart';
 import 'package:trip_connect/globle/pallet.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
-  await GetStorage.init();
+
+  try {
+    await Firebase.initializeApp();
+    await GetStorage.init();
+    await dotenv.load(fileName: "../.env");
+  } catch (e) {
+    print("Initialization error: $e");
+  }
+
   runApp(const MyApp());
 }
 

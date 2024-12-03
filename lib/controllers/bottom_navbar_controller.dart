@@ -11,7 +11,7 @@ class BottomNavbarController extends GetxController {
     SearchScreen(),
     ChatScreen(),
     ProfileScreen(),
-    CreateTripScreen(),
+    
   ];
 
   RxInt bottamBarActiveIndex = 0.obs;
